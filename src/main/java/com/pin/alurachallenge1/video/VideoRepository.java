@@ -1,9 +1,9 @@
-package com.pin.alurachallenge1.product;
+package com.pin.alurachallenge1.video;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ProductRepository extends JpaRepository<Product, Long> {
+public interface VideoRepository extends JpaRepository<Video, Long> {
 
 }
