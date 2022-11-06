@@ -1,7 +1,6 @@
 package com.pin.alurachallenge1.video;
 
 import javax.persistence.*;
-import java.util.Optional;
 
 @Entity
 public class Video {
@@ -10,8 +9,11 @@ public class Video {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @Column(nullable = false, unique = true)
     private String titulo;
+    @Column(nullable = true)
     private String descricao;
+    @Column(nullable = false, unique = true)
     private String url;
 
     public Video(String titulo, String descricao, String url) {

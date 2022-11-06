@@ -6,9 +6,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @Controller
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping("/videos")
 public class VideoController {
 
@@ -32,6 +34,18 @@ public class VideoController {
     @PostMapping("")
     public ResponseEntity<?> createVideo(@RequestBody VideoRequest videoRequest) {
         return ResponseEntity.ok(videoService.save(Video.convert(videoRequest)));
+    }
+
+    @PostMapping("/more")
+    public ResponseEntity<?> createVideo(@RequestBody List<Video> videoRequest) {
+        StringBuilder response = new StringBuilder();
+        for(Video item : videoRequest){
+            if (videoService.findById(item.getId()).isEmpty()) {
+                videoService.save(item);
+                response.append(item.toString());
+            }
+        }
+        return ResponseEntity.ok(response.toString());
     }
 
     @PutMapping("/{id}")
